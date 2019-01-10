@@ -48,6 +48,9 @@ class GLRenderer: Renderer {
         var uvBuffer: FloatBuffer
 
 
+        //use conus shader
+        GLES20.glUseProgram(riGraphicTools.sp_Image)
+
         // clear Screen and Depth Buffer, we have set the clear color as black.
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
@@ -94,42 +97,22 @@ class GLRenderer: Renderer {
         LoadImage(Constants.FilesPath + "conus.gif")
 
 
-        // get handle to vertex shader's vPosition member
         val mPositionHandle = GLES20.glGetAttribLocation(riGraphicTools.sp_Image, "vPosition")
-
-        // Enable generic vertex attribute array
         GLES20.glEnableVertexAttribArray(mPositionHandle)
-
-        // Prepare the triangle coordinate data
         GLES20.glVertexAttribPointer(mPositionHandle, 3, GLES20.GL_FLOAT, false, 0, vertexBuffer)
-
-        // Get handle to texture coordinates location
         val mTexCoordLoc = GLES20.glGetAttribLocation(riGraphicTools.sp_Image, "a_texCoords")
         GLES20.glEnableVertexAttribArray(mTexCoordLoc)
         GLES20.glVertexAttribPointer(mTexCoordLoc, 2, GLES20.GL_FLOAT, false, 0, uvBuffer)
-
-        // Get handle to shape's transformation matrix
         val mtrxhandle = GLES20.glGetUniformLocation(riGraphicTools.sp_Image, "uMVPMatrix")
-
-        // Apply the projection and view transformation
         GLES20.glUniformMatrix4fv(mtrxhandle, 1, false, mtrxProjectionAndView, 0)
-
-        // Get handle to textures locations
-        val mSamplerLoc = GLES20.glGetUniformLocation(riGraphicTools.sp_Image, "u_texture")
-
-        // Set the sampler texture unit to 0, where we have saved the texture.
-        GLES20.glUniform1i(mSamplerLoc, 0)
-
-        // Draw the triangle
+        val conusTexture = GLES20.glGetUniformLocation(riGraphicTools.sp_Image, "u_texture")
+        GLES20.glUniform1i(conusTexture, 0)
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, indices.size, GLES20.GL_UNSIGNED_SHORT, drawListBuffer)
 
         // Disable vertex array
         GLES20.glDisableVertexAttribArray(mPositionHandle)
         GLES20.glDisableVertexAttribArray(mTexCoordLoc)
 
-
-        // Save the current time to see how long it took :).
-        //mLastTime = now;
 
     }
 
@@ -185,7 +168,7 @@ class GLRenderer: Renderer {
         GLES20.glAttachShader(riGraphicTools.sp_Image, fragmentShader) // add the fragment shader to program
         GLES20.glLinkProgram(riGraphicTools.sp_Image)                  // creates OpenGL ES program executables
         // Set our shader programm
-        GLES20.glUseProgram(riGraphicTools.sp_Image)
+        //GLES20.glUseProgram(riGraphicTools.sp_Image)
     }
 
 

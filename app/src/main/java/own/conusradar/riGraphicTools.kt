@@ -4,26 +4,9 @@ import android.opengl.GLES20
 
 object riGraphicTools {
 
-    // Program variables
-    var sp_SolidColor: Int = 0
     var sp_Image: Int = 0
 
 
-    /* SHADER Solid
-	 *
-	 * This shader is for rendering a colored primitive.
-	 *
-	 */
-    val vs_SolidColor = "uniform 	mat4 		uMVPMatrix;" +
-            "attribute 	vec4 		vPosition;" +
-            "void main() {" +
-            "  gl_Position = uMVPMatrix * vPosition;" +
-            "}"
-
-    val fs_SolidColor = "precision mediump float;" +
-            "void main() {" +
-            "  gl_FragColor = vec4(0.5,0,0,1);" +
-            "}"
 
     /* SHADER Image
 	 * /////////////
