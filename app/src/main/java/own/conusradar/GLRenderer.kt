@@ -39,7 +39,8 @@ class GLRenderer: Renderer {
         /* Do stuff to resume the renderer */
         //mLastTime = System.currentTimeMillis();
     }
-    */
+
+*/
 
     override fun onDrawFrame(unused: GL10) {
 
