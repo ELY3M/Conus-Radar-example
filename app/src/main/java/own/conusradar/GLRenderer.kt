@@ -23,7 +23,7 @@ class GLRenderer: Renderer {
 
 
     internal var ortInt = 400
-    // Our matrices
+
     private val mtrxProjection = FloatArray(16)
     private val mtrxView = FloatArray(16)
     private val mtrxProjectionAndView = FloatArray(16)
@@ -60,12 +60,16 @@ class GLRenderer: Renderer {
         val base = RectF(-500f, 500f, 500f, -500f)
         val scale = 1f
 
-        val x1 = base.left * scale
-        val x2 = base.right * scale
-        val y1 = base.bottom * scale
-        val y2 = base.top * scale
+        val left = base.left * scale
+        val right = base.right * scale
+        val bottom = base.bottom * scale
+        val top = base.top * scale
 
-        val vertices = floatArrayOf(x1, y2, 0.0f, x1, y1, 0.0f, x2, y1, 0.0f, x2, y2, 0.0f)
+        val vertices = floatArrayOf(
+            left, top, 0.0f,
+            left, bottom, 0.0f,
+            right, bottom, 0.0f,
+            right, top, 0.0f)
 
 
 
